@@ -1,0 +1,32 @@
+{% extends "BZUserBundle::layout.html.twig" %}
+{% block content_body %}
+<div style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<form  class="ui-draggable" style="position: relative; left: 424px; top: 80px;" action="{{ path('nouvel_archive') }}" method="post" {{ form_enctype(form) }} >
+<div class="col-lg-4">
+    <div class="panel panel-success">
+        <div class="panel-heading" style="font-size: 13px;">
+            <i class="icon-download-alt"> </i>  DONNEES D'IDENTIFICATION DE L'ARCHIVE     (1/2)
+        </div>
+        <div class="panel-body">
+            {{ form_widget(form) }}
+        </div>
+        <div class="panel-footer">
+           <a type="button" class="btn btn-sm btn-default " href="{{ path('read_archive', {'exercice': 0}) }}" id="retour"><i class="icon-arrow-left"> </i> Annuler</a>
+           <button type="submit" class="btn btn-sm  btn-success" >Etape suivante <i class="icon-arrow-right"> </i> </button>
+           <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Enregistrement ...</span>
+        </div>
+    </div>
+</div>
+{{ form_rest(form) }}
+</form>
+</div>
+{% endblock content_body %}
+{% block javascript %} 
+    <script>
+    $(".chzn-select").chosen();
+       $(".chzn-select-deselect").chosen({
+        allow_single_deselect: true
+       });
+    //$('form').draggable();
+ </script>
+{% endblock javascript %}

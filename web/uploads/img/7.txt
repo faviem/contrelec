@@ -1,0 +1,6 @@
+setxkbmap fr
+php app/console doctrine:fixtures:load
+php app/console doctrine:database:create
+http://ebanking-bj.diamondbank.com/recrutement/src/cv.php
+https://www.codeur.com/users/147396/profile/edit
+http://www.lesjeudis.com/magazine-informatique/metiers-informatiques

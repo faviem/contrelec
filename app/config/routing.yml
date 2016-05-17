@@ -1,0 +1,47 @@
+pub_acceuil:
+    pattern:    /
+    defaults: { _controller: BZBlogBundle:Blog:index }  
+
+#bz_contacts:
+#    resource: "@BZContactsBundle/Resources/config/routing.yml"
+#    prefix:   /bz_contacts
+
+#bz_affecter:
+#    resource: "@BZAffecterBundle/Resources/config/routing.yml"
+#    prefix:   /bz_affecter
+
+bz_archive:
+    resource: "@BZArchiveBundle/Resources/config/routing.yml"
+    
+    
+    prefix:   /bz_archive
+
+#bz_arrivee:
+#    resource: "@BZArriveeBundle/Resources/config/routing.yml"
+#    prefix:   /bz_arrivee
+
+#bz_tchat:
+#    resource: "@BZTchatBundle/Resources/config/routing.yml"
+#    prefix:   /bz_tchat
+
+bz_blog:
+    resource: "@BZBlogBundle/Resources/config/routing.yml"
+    prefix:   /bz_blog
+
+bz_user:
+    resource: "@BZUserBundle/Resources/config/routing.yml"
+    prefix:   /bz_user
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix:   /bz_user
+    
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix:   /
+#
+#    
+#fos_user_registration_register:
+#    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#    prefix: /register
+#    

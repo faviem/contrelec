@@ -1,0 +1,207 @@
+{% extends "BZUserBundle::layout.html.twig"%}
+
+{% block content_body %}
+    <div class="col-lg-12" style="margin-top: 1%;" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span style="text-shadow: 0px 0.5px 0.5px blue;font-size: 13px;"> STATISTIQUE DE L'ENREGISTREMENT DES ARCHIVES </span> 
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li  {%if option==1 %}class="active" {% endif %}><a href="#home" data-toggle="tab" style="font-size: 12px;"> <i class="icon-calendar"></i> Exercice</a>
+                    </li>
+                    <li  {%if option==2 %}class="active" {% endif %}><a href="#profile" data-toggle="tab" style="font-size: 12px;"> <i class="icon-folder-open"></i> Emplacement d'archivage</a>
+                    </li>
+                    <li  {%if option==3 %}class="active" {% endif %}><a href="#messages" data-toggle="tab" style="font-size: 12px;"> <i class="icon-cogs"></i> Catégorie d'archive</a>
+                    </li>
+                    <li  {%if option==4 %}class="active" {% endif %}><a href="#settings" data-toggle="tab" style="font-size: 12px;"> <i class="icon-sitemap"></i>  Direction - service - agence</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade {%if option==1 %} in active {% endif %}"  id="home">
+                        
+                        <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table style="color: black;" class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_desc" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" aria-sort="descending" style="font-size: 13px;text-align: center;">
+                                                Exercices
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nbre Archives Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Consulter détail
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% for element in  exercices %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                {% set tot =0 %}
+                                                 {% for arch in  element.archives %}
+                                                      {%if arch.estsupprimer==0 %}
+                                                        {% set tot =tot+1 %}
+                                                      {% endif %}
+                                                 {% endfor %}
+                                                <td class="" style="font-size: 12px;text-align: center;">{{  element.annee }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">{{  tot }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">
+                                                  <a href="{{ path('stat_archive_exercice',{'id': element.id}) }}" title="Consulter le détail" class="btn btn-info btn-xs btn-rect " style="font-size: 11px;"><i class="icon-asterisk"> </i> </a>
+                                                </td>
+                                              </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                    
+                    </div>
+                                    
+                    <div class="tab-pane fade {%if option==2 %} in active {% endif %}" id="profile">
+                        
+                        <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table style="color: black;" class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example1" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_desc" tabindex="0" aria-controls="dataTables-example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" aria-sort="descending" style="font-size: 13px;text-align: center;">
+                                                Emplacement d'archivage
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nbre Archives Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Consulter détail
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% for element in  objetclassements %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                {% set tot =0 %}
+                                                 {% for arch in  element.archives %}
+                                                      {%if arch.estsupprimer==0 %}
+                                                        {% set tot =tot+1 %}
+                                                      {% endif %}
+                                                 {% endfor %}
+                                                <td class="" style="font-size: 12px;">{{  element.emplacementComplet }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">{{  tot }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">
+                                                  <a href="{{ path('stat_archive_emplacement',{'id': element.id}) }}" title="Consulter le détail" class="btn btn-info btn-xs btn-rect " style="font-size: 11px;"><i class="icon-asterisk"> </i> </a>
+                                                </td>
+                                              </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                                    
+                    <div class="tab-pane fade {%if option==3 %} in active {% endif %}" id="messages">
+                        
+                          <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table style="color: black;" class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example2" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_desc" tabindex="0" aria-controls="dataTables-example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" aria-sort="descending" style="font-size: 13px;text-align: center;">
+                                                Catégorie d'archive
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nbre Archives Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Consulter détail
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% for element in  categories %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                {% set tot =0 %}
+                                                 {% for arch in  element.archives %}
+                                                      {%if arch.estsupprimer==0 %}
+                                                        {% set tot =tot+1 %}
+                                                      {% endif %}
+                                                 {% endfor %}
+                                                <td class="" style="font-size: 12px;">{{  element.libelle }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">{{  tot }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">
+                                                  <a href="{{ path('stat_archive_categorie',{'id': element.id}) }}" title="Consulter le détail" class="btn btn-info btn-xs btn-rect " style="font-size: 11px;"><i class="icon-asterisk"> </i> </a>
+                                                </td>
+                                              </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                    
+                    </div>
+                                    
+                    <div class="tab-pane fade {%if option==4 %} in active {% endif %}" id="settings">
+                        
+                          <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table style="color: black;" class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example3" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_desc" tabindex="0" aria-controls="dataTables-example3" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" aria-sort="descending" style="font-size: 13px;text-align: center;">
+                                                Direction - Service - Agence
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example3" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nbre Archives Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example3" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Consulter détail
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% for element in  services %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                {% set tot =0 %}
+                                                 {% for arch in  element.archives %}
+                                                      {%if arch.estsupprimer==0 %}
+                                                        {% set tot =tot+1 %}
+                                                      {% endif %}
+                                                 {% endfor %}
+                                                <td class="" style="font-size: 12px;">{{  element.denomination }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">{{  tot }} </td>
+                                                <td class="" style="font-size: 12px;text-align: center;">
+                                                  <a href="{{ path('stat_archive_service',{'id': element.id}) }}" title="Consulter le détail" class="btn btn-info btn-xs btn-rect " style="font-size: 11px;"><i class="icon-asterisk"> </i> </a>
+                                                </td>
+                                              </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                    
+                    </div>
+                                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content_body %}
+{% block javascript %} 
+    <script>
+        
+         $('#dataTables-example1').dataTable();
+         $('#dataTables-example2').dataTable();
+         $('#dataTables-example3').dataTable();
+         
+    </script>
+{% endblock javascript %}

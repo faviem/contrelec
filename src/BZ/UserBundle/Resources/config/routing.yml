@@ -1,0 +1,77 @@
+#routes pour notification    
+notification:
+    path:     /notification
+    defaults: { _controller: "BZUserBundle:User:notification" }
+    
+contenu_user:
+    path:     /contenu_user
+    defaults: { _controller: "BZUserBundle:User:contenu_user" }
+#fin
+bz_user_deck:
+    path:     /bz_user_deck
+    defaults: { _controller: "BZUserBundle:User:deconnecter" }
+
+bz_user_create:
+    path:     /create
+    defaults: { _controller: "BZUserBundle:User:create" }
+    
+bz_user_register:
+    path:     /register
+    defaults: { _controller: "BZUserBundle:User:register" }
+
+bz_user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "BZUserBundle:User:edit" }
+
+bz_user_update:
+    path:     /update_user
+    defaults: { _controller: "BZUserBundle:User:update" }
+
+bz_user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "BZUserBundle:User:delete" }
+
+bz_user_membre:
+    path:     /membres_users
+    defaults: { _controller: "BZUserBundle:User:membre" }   
+
+bz_user_lock:
+    pattern:    /bz_user_lock/{id}
+    defaults: { _controller: "BZUserBundle:User:bz_user_lock"}
+    requirements:
+        id: \d+
+        
+bz_user_unlock:
+    pattern:    /bz_user_unlock/{id}
+    defaults: { _controller: "BZUserBundle:User:bz_user_unlock"}
+    requirements:
+        id: \d+
+
+voir_groupe:
+    pattern:    /voir_groupe
+    defaults: { _controller: BZUserBundle:User:voir_groupe }
+    
+voir_user_service:
+    pattern:    /voir_user_service/{service}
+    defaults: { _controller: BZUserBundle:User:voir_user_service }
+    
+membre_groupe:
+    pattern:    /membre_groupe
+    defaults: { _controller: BZUserBundle:User:membre_groupe }
+    
+print_repuser:
+    pattern:    /print_repuser
+    defaults: { _controller: BZUserBundle:User:print_repuser }
+    
+bz_user_changepassword:
+    pattern:    /bz_user_changepassword
+    defaults: { _controller: BZUserBundle:ChangePassword:changePassword }
+#les routes de departement
+bz_user_servicesagent:
+    resource: "@BZUserBundle/Resources/config/servicesagent.yml"
+    prefix:   /
+    
+#les routes de ville
+bz_user_qualification:
+    resource: "@BZUserBundle/Resources/config/qualification.yml"
+    prefix:   /

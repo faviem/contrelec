@@ -1,0 +1,24 @@
+
+read_rubriquefinance:
+    pattern:    /read_rubriquefinance
+    defaults: { _controller: BZBlogBundle:RubriqueFinance:read_rubriquefinance}  
+    
+create_rubriquefinance:
+    pattern:    /create_rubriquefinance
+    defaults: { _controller: BZBlogBundle:RubriqueFinance:create_rubriquefinance}
+    
+update_rubriquefinance:
+    pattern:    /update_rubriquefinance/{id}
+    defaults: { _controller: BZBlogBundle:RubriqueFinance:update_rubriquefinance}
+    requirements:
+        id: \d+
+    
+delete_rubriquefinance:
+    pattern:    /delete_rubriquefinance/{id}
+    defaults: { _controller: BZBlogBundle:RubriqueFinance:delete_rubriquefinance}
+    requirements:
+        id: \d+
+        
+print_rubriquefinance:
+    pattern:    /print_rubriquefinance
+    defaults: { _controller: BZBlogBundle:RubriqueFinance:print_rubriquefinance}

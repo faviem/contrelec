@@ -1,0 +1,62 @@
+<page backtop="10mm" backbottom="10mm"  {% block marge %} backleft="10mm" backright="10mm" {% endblock marge %} orientation="paysage" >
+    <page_header>
+        <table style="width: 100%; border: solid 1.5px;border-color: rgb(34, 170, 34) rgb(34, 170, 34);border-radius: 3mm;">
+            <tr>
+                <td style="text-align: right;    width: 1%"></td>
+                <td style="width: 2%">       
+                     <img src="./assets/icons/plainte.jpg" alt="Archives"  style="height: 1.5%;width: 100%;" >      
+                 </td>
+                <td style="text-align: center; width: 15%;font-size: 11px;">ARCH & COM</td>
+                <td style="text-align: right;    width: 2%">
+                     <img src="./images/communication.jpg" alt="Communication"  style="height: 1.5%;width: 100%;" >      
+                </td>
+                
+                <td style="text-align: center;width: 50%;font-weight: bold;font-size: 12px;"> {% block title %} LISTE DES AGENTS {% endblock title %}</td>
+                <td style="text-align: right;    width: 31%;font-size: 9px;">Editer le : {{"now"|date('d/m/Y') }}</td>
+                <td style="text-align: right;    width: 1%"></td>
+            </tr>
+        </table>
+    </page_header>
+    <page_footer>
+        <table style="width: 100%; border: solid 1px black;">
+            <tr>
+                <td style="text-align: left; width: 50%;font-size: 10px;">Copyright 2016</td>
+                <td style="text-align: right;    width: 50%;font-size: 10px;">page [[page_cu]]/[[page_nb]]</td>
+            </tr>
+        </table>
+    </page_footer>
+    <div style="width: 100%; height: 2%;border: none;"></div>
+      {% block content_body %}
+          <table style="width: 100%; border: solid 1px;border-color: black;" cellspacing="0">
+              <thead>
+                  <tr>
+                      <th style="text-align: right;width: 40%;height: 3%;text-align: center;font-weight: bold;font-size: 8pt;background-color: #85d0e7;color: #000;">
+                          NOM PRENOM(S)</th>
+                      <th style="text-align: right;width: 20%;height: 3%;text-align: center;font-weight: bold;font-size: 8pt;background-color: #85d0e7;color: #000;">
+                          E@MAIL</th>
+                      <th style="text-align: right;width: 15%;height: 3%;text-align: center;font-weight: bold;font-size: 8pt;background-color: #85d0e7;color: #000;">
+                          CONTACT(S)</th>
+                      <th style="text-align: right;width: 20%;height: 3%;text-align: center;font-weight: bold;font-size: 8pt;background-color: #85d0e7;color: #000;">
+                          SERVICE - DIRECTION - AGENCE</th>
+                      <th style="text-align: right;width: 5%;height: 3%;text-align: center;font-weight: bold;font-size: 8pt;background-color: #85d0e7;color: #000;">
+                          PHOTO</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% set nbre=0 %}
+                  {% for element in users %}
+                      <tr style="border: solid 1px;border-color: black;padding: 0;background-color: {% if nbre%2==0 %} #ffffff; {% else %} #EEEEEE; {% endif%}">
+                          {% set nbre=nbre+1 %}
+                          <td style="border: solid 0.5px;border-color: black;padding: 0;text-align: left;font-size: 9pt;height: 3%;">{{ element.nomPrenom }}</td>
+                          <td style="border: solid 0.5px;border-color: black;padding: 0;text-align: left;font-size: 9pt;height: 3%;">{{ element.email }}</td>
+                          <td style="border: solid 0.5px;border-color: black;padding: 0;text-align: left;font-size: 9pt;height: 3%;">{{ element.mobile }}</td>
+                          <td style="border: solid 0.5px;border-color: black;padding: 0;text-align: left;font-size: 9pt;height: 3%;">{{ element.service.sigle }}</td>
+                          <td style="border: solid 0.5px;border-color: black;padding: 0;text-align: left;font-size: 9pt;height: 3%;text-align: center;">
+                          <img src="{% if element.image is not null %} ./uploads/img/{{ element.image.id }}.{{ element.image.url }} {% else %} ./uploads/img/user.jpg {% endif %}" style="height: 22px;width: 22px;" class="img-circle" alt="Photo"/>
+                          </td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>            
+      {% endblock content_body %}
+</page>

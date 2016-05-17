@@ -1,0 +1,41 @@
+<div style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<form  class="ui-draggable" style="position: relative; left: 424px; top: 229px;" action="{{ path('create_niveaualerte') }}" method="post" {{ form_enctype(form) }} >
+<div class="col-lg-4">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            ENREGISTREMENT D'INDICE D'IMPOTANCE
+        </div>
+        <div class="panel-body">
+          
+           {{ form_widget(form) }}
+        </div>
+        <div class="panel-footer">
+             <a type="button" class="btn btn-sm btn-default " href="#" onclick="location.reload();"><i class="icon-arrow-left"> </i> Retour</a>
+                  <button type="submit" class="btn btn-sm  btn-success" >Enregistrer</button>
+                  <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Enregistrement ...</span>
+        </div>
+    </div>
+</div>
+{{ form_rest(form) }}
+</form>
+<script>
+     $('form').draggable();
+     $("form").submit(function(event) {
+            var $this = $(this);
+             $('.tachat_img').removeClass('hide');
+             $.ajax({
+                   type: $this.attr('method'),
+                   url: $this.attr('action'),
+                   cache: false,
+                   data: $this.serialize(),
+                   success: function() {
+                     $('.tachat_img').addClass('hide');
+                   },
+                   error: function() {
+                      // $('.tachat_img').removeClass('hide');
+                   }
+               });
+               //we dont what the browser to submit the form
+               event.preventDefault();
+           });
+</script></div>

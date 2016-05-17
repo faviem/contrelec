@@ -1,0 +1,24 @@
+
+read_exercice:
+    pattern:    /read_exercice
+    defaults: { _controller: BZBlogBundle:Exercice:read_exercice}  
+    
+create_exercice:
+    pattern:    /create_exercice
+    defaults: { _controller: BZBlogBundle:Exercice:create_exercice}
+    
+update_exercice:
+    pattern:    /update_exercice/{id}
+    defaults: { _controller: BZBlogBundle:Exercice:update_exercice}
+    requirements:
+        id: \d+
+    
+delete_exercice:
+    pattern:    /delete_exercice/{id}
+    defaults: { _controller: BZBlogBundle:Exercice:delete_exercice}
+    requirements:
+        id: \d+
+        
+print_exercice:
+    pattern:    /print_exercice
+    defaults: { _controller: BZBlogBundle:Exercice:print_exercice}

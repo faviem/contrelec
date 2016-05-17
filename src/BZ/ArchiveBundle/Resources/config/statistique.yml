@@ -1,0 +1,25 @@
+stat_archive_date:
+    pattern:    /stat_archive_date
+    defaults: { _controller: BZArchiveBundle:Statistique:stat_archive_date}
+    
+stat_archive_point:
+    pattern:    /stat_archive_point
+    defaults: { _controller: BZArchiveBundle:Statistique:stat_archive_point}
+    
+stat_archive_exercice:
+    pattern:    /stat_archive_exercice/{id}
+    defaults: { _controller: BZArchiveBundle:Statistique:stat_archive_exercice}
+    
+stat_archive_emplacement:
+    pattern:    /stat_archive_emplacement/{id}
+    defaults: { _controller: BZArchiveBundle:Statistique:stat_archive_emplacement}
+    
+stat_archive_categorie:
+    pattern:    /stat_archive_categorie/{id}
+    defaults: { _controller: BZArchiveBundle:Statistique:stat_archive_categorie}
+    
+stat_archive_service:
+    pattern:    /stat_archive_service/{id}
+    defaults: { _controller: BZArchiveBundle:Statistique:stat_archive_service}
+
+    

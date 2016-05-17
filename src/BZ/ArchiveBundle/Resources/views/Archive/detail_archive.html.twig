@@ -1,0 +1,89 @@
+<div style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<form  class="ui-draggable" style="position: relative; left: 424px; top: 150px;" action="#" method="post"  >
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="icon-download-alt"> </i>  DETAIL DE  L'ARCHIVE
+          <a type="button" class="btn btn-default btn-xs btn-flat " href="#" id="retour" style="float: right;" onclick="location.reload();"><i class="icon-arrow-left"> </i> Retour</a>
+         </div>
+        <div class="panel-body">
+              <div class="box" >
+                            <header>
+                                <h5>DOCUMENT(S) ARCHIVE(S)</h5>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <a href="#sortableTable" data-toggle="collapse" class="btn btn-default btn-sm accordion-toggle minimize-box">
+                                            <i class="icon-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </header>
+                            <div style="height: auto;" id="sortableTable" class="body in">
+                                <table class="table table-bordered sortableTable responsive-table">
+                                    <tbody style="font-size: 12px;">
+                                        {% set nbre=0 %}
+                                            {% for doc in archive.documentarchives %}
+                                                {%  set nbre=nbre+1 %}
+                                            <tr>
+                                                <td><a href="{{ asset( doc.image.dowloadPath) }}" target="_blank"><strong> {{ doc.image.nameFile }} </strong></a></td>
+                                             </tr>
+                                            {% endfor %}
+                                           {% if  nbre==0 %}
+                                             <tr>
+                                                 <td style="color: red;"> Aucun document n'est archivé !!! </td>
+                                            </tr>
+                                       {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                    <div class="box">
+                            <header>
+                                <h5>VISIBILITE DE L'ARCHIVE</h5>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                    <a href="#sortableTable1" data-toggle="collapse" class="btn btn-default btn-sm accordion-toggle minimize-box">
+                                            <i class="icon-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </header>
+                            <div style="height: auto;" id="sortableTable1" class="body in">
+                                <table class="table table-bordered sortableTable responsive-table">
+                                    <tbody style="font-size: 12px;">
+                                        {% set nbrevis=0 %}
+                                            {% for agent in archive.visibilitearchives %}
+                                                {%  set nbrevis=nbrevis+1 %}
+                                            <tr>
+                                                <td> {{ agent.user.nomPrenom }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                           {% if  nbrevis==0 %}
+                                             <tr>
+                                                 <td style="color: red;"> Cet archive n'est rendu visible à aucun autre Agent !!! </td>
+                                            </tr>
+                                       {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                
+           <p style="font-size: 12px;">Date d'archivage :  <strong> {{ archive.dateArchive|date('d/m/Y') }} </strong> </p>
+           <p style="font-size: 12px;">Catégorie :  <strong> {{ archive.categoriearchive.libelle }} </strong> </p>
+           <p style="font-size: 12px;">Références :  <strong> {{ archive.ref }} </strong> </p>
+           <p style="font-size: 12px;">Archivé physiquement dans :  <strong> {{ archive.objetclassement.ref }} </strong> </p>
+           <p style="font-size: 12px;">Service Responsable :  <strong> {{ archive.service.denomination }} </strong> </p>
+           <p style="font-size: 12px;">Contenu : <br/> <strong> {{ archive.contenu}} </strong> </p>
+   
+       </div>
+        <div class="panel-footer">
+         </div>
+    </div>
+</div>
+</form>
+<div id='frm_createVille'>
+    
+</div>
+<script>
+     $('form').draggable();
+</script></div>

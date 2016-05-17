@@ -1,0 +1,42 @@
+#les routes de ville
+bz_blog_objetclassement:
+    resource: "@BZBlogBundle/Resources/config/objetclassement.yml"
+    prefix:   /
+#les routes de ville
+bz_blog_objetconservation:
+    resource: "@BZBlogBundle/Resources/config/objetconservation.yml"
+    prefix:   /    
+#les routes de ville
+bz_blog_niveaualerte:
+    resource: "@BZBlogBundle/Resources/config/niveaualerte.yml"
+    prefix:   /
+#les routes de departement
+bz_blog_exercice:
+    resource: "@BZBlogBundle/Resources/config/exercice.yml"
+    prefix:   /
+#les routes de departement
+bz_blog_message:
+    resource: "@BZBlogBundle/Resources/config/message.yml"
+    prefix:   /
+bz_blog_tchat:
+    resource: "@BZBlogBundle/Resources/config/tchat.yml"
+    prefix:   /   
+bz_blog_rubriquecontrole:
+    resource: "@BZBlogBundle/Resources/config/rubriquecontrole.yml"
+    prefix:   /   
+bz_blog_rubriquefinance:
+    resource: "@BZBlogBundle/Resources/config/rubriquefinance.yml"
+    prefix:   /   
+bz_blog_sousrubriquecontrole:
+    resource: "@BZBlogBundle/Resources/config/sousrubriquecontrole.yml"
+    prefix:   /   
+bz_blog_pointcontrole:
+    resource: "@BZBlogBundle/Resources/config/pointcontrole.yml"
+    prefix:   /   
+
+notifications:
+    pattern:    /notifications
+    defaults: { _controller: BZBlogBundle:Blog:notifications}
+    
+#les routes des services
+

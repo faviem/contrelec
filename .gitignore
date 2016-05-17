@@ -1,0 +1,16 @@
+/nbproject/
+/app/cache/
+/app/logs/
+/app/config/parameters.yml
+/vendor/
+/web/bundles/
+/web/js/
+/web/css/
+/web/bin/
+/node_modules/
+/bower_components/
+/web/fonts/
+/dist/
+bin
+*Thumbs.db
+*~

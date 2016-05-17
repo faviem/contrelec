@@ -1,0 +1,14 @@
+{# src/BZ/BlogBundle/Resources/views/Blog/index.html.twig #}
+{# ... le reste de la vue #}
+<div class="pagination">
+<ul>
+{% for article in articles %}
+{# On inclut la vue à chaque itération dans la boucle #}
+{% include "BZBlogBundle:Blog:article.html.twig" with
+{'accueil': true} %}
+<hr />
+{% else %}
+<p>Pas (encore !) d'articles</p>
+{% endfor %}
+</ul>
+</div>

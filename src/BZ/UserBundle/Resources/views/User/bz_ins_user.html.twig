@@ -1,0 +1,72 @@
+{% extends "BZUserBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="col-md-8"  style="margin-left:210px;">
+    <div class="box box-solid box-success" >
+        <div class="box-header">
+            <h5 class="box-title" ><i class="fa fa-user-plus"> </i> CREER UN UTILISATEUR </h5> 
+            <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <a href="{{ path('bz_user_liste')}}" style="float : right;margin-right: 15px;margin-left: 10px;"> <i class="fa fa-close"></i></a>
+            </div>
+        </div><!-- /.box-header -->
+        <div class="box-body" >
+            <form  action="{{ path('bz_ins_user') }}" method="post" {{ form_enctype(edit_form) }} >
+            <div style="padding-left: 60px;padding-right: 60px;" > 
+              {{ form_widget(edit_form) }}
+            </div>
+            <style>
+              .thumb {
+                height: 75px;
+                border: 1px solid #000;
+                margin: 10px 5px 0 0;
+              }
+            </style>
+            <output id="list" style="float: right; margin-top: -30px;margin-right: 18px;">
+               <img class="img-polaroid" style="height:50px;width:50px;" src="" title="Ma photo de profil"/>
+            </output>
+
+            <div style="float: right;margin-top: 15px;margin-right: 74px;" > 
+                <a type="button" class="btn btn-default " href="{{ path('bz_user_liste')}}" ><i class="fa fa-mail-reply"> </i> Retour</a>
+                  <button type="submit" class="btn btn-sm btn-success" >Créer</button>
+            </div>
+           </form>
+        </div><!-- /.box-body -->
+      </div>
+      </div>
+{% endblock content %}
+{% block javascripts %}
+    {{ parent()}}
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+
+      var reader = new FileReader();
+
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['<img class="img-polaroid" style="height:50px;width:50px;" src="', e.target.result,
+                            '" title="', escape(theFile.name), '"/>'].join('');
+          $('#list').html(span);
+        };
+      })(f);
+
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+
+  document.getElementById('bz_userbundle_user_image_file').addEventListener('change', handleFileSelect, false);
+  </script>
+{% endblock javascripts %}

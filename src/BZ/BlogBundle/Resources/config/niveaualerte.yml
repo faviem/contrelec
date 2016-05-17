@@ -1,0 +1,24 @@
+
+read_niveaualerte:
+    pattern:    /read_niveaualerte
+    defaults: { _controller: BZBlogBundle:NiveauAlerte:read_niveaualerte}  
+    
+create_niveaualerte:
+    pattern:    /create_niveaualerte
+    defaults: { _controller: BZBlogBundle:NiveauAlerte:create_niveaualerte}
+    
+update_niveaualerte:
+    pattern:    /update_niveaualerte/{id}
+    defaults: { _controller: BZBlogBundle:NiveauAlerte:update_niveaualerte}
+    requirements:
+        id: \d+
+    
+delete_niveaualerte:
+    pattern:    /delete_niveaualerte/{id}
+    defaults: { _controller: BZBlogBundle:NiveauAlerte:delete_niveaualerte}
+    requirements:
+        id: \d+
+        
+print_niveaualerte:
+    pattern:    /print_niveaualerte
+    defaults: { _controller: BZBlogBundle:NiveauAlerte:print_niveaualerte}

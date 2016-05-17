@@ -1,0 +1,24 @@
+
+read_sousrubriquecontrole:
+    pattern:    /read_sousrubriquecontrole
+    defaults: { _controller: BZBlogBundle:SousRubriqueControle:read_sousrubriquecontrole}  
+    
+create_sousrubriquecontrole:
+    pattern:    /create_sousrubriquecontrole
+    defaults: { _controller: BZBlogBundle:SousRubriqueControle:create_sousrubriquecontrole}
+    
+update_sousrubriquecontrole:
+    pattern:    /update_sousrubriquecontrole/{id}
+    defaults: { _controller: BZBlogBundle:SousRubriqueControle:update_sousrubriquecontrole}
+    requirements:
+        id: \d+
+    
+delete_sousrubriquecontrole:
+    pattern:    /delete_sousrubriquecontrole/{id}
+    defaults: { _controller: BZBlogBundle:SousRubriqueControle:delete_sousrubriquecontrole}
+    requirements:
+        id: \d+
+        
+print_sousrubriquecontrole:
+    pattern:    /print_sousrubriquecontrole
+    defaults: { _controller: BZBlogBundle:SousRubriqueControle:print_sousrubriquecontrole}

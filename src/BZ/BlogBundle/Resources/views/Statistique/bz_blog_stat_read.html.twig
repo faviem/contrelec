@@ -1,0 +1,282 @@
+{% extends "BZUserBundle::layout.html.twig"%}
+
+{% block content_body %}
+    <div class="col-lg-12" style="margin-top: 1%;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                 <span style="text-shadow: 0px 0.5px 0.5px blue;font-size: 13px;"> POINT DES ARCHIVES DE COURIERS ENREGISTRES</span>
+                        <select style="width: 25%;" id="getExercices" name="getExercices" class="form-control chzn-select">
+                            <option value="">--Choisissez l'exercice--</option>
+                            {% for exo  in  getExercices %}
+                                <option value="{{ exo.id }}" {% if exo.id==exercice %} selected="true" {% endif %}>{{exo.annee}}</option>
+                            {% endfor %}
+                        </select>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#home" data-toggle="tab" style="font-size: 11px;">PAR CATEGORIE</a>
+                    </li>
+                    <li class=""><a href="#profile" data-toggle="tab" style="font-size: 11px;">PAR OBJET</a>
+                    </li>
+                    <li class=""><a href="#profile2" data-toggle="tab" style="font-size: 11px;">PAR EMPLACEMENT/REFERENCE</a>
+                    </li>
+                    <li class=""><a href="#profile3" data-toggle="tab" style="font-size: 11px;">PAR ORDRE D'IMPORTANCE</a>
+                    </li>
+                    <li class=""><a href="#profile1" data-toggle="tab" style="font-size: 11px;">ANNUEL</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="home">
+                        
+                        <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Catégories de courier
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nombre Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Détails
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% set tot = 0 %}
+                                        {% for serv in categories %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                 {% set tot = tot+ serv.total%}
+                                                <td  style="font-size: 12px;">{{ serv.libelle }}</td>
+                                                <td  style="font-size: 12px;text-align: center;">{{ serv.total }} </td>
+                                                <td  style="text-align: center;">  
+                                                    <a href="{{ path('bz_blog_detail_categorie', {'categorie':  serv.id,'exercice': exercice  }) }}" class="btn btn-info btn-xs btn-flat " ><i class="icon  icon-share "></i></a>
+                                                </td>
+                                            </tr>
+                                            
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                                <td  style="font-size: 12px;text-align: center;" >TOTAL</td>
+                                                 <td  style="font-size: 12px;text-align: center;">{{ tot }}</td>
+                                                 <td  style="font-size: 12px;"></td>
+                                             </tr>
+                                             </tfoot>
+                                </table>
+                                        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        
+                        <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example2" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Objets de courier
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nombre Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Détails
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% set tot = 0 %}
+                                        {% for serv in objets %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                 {% set tot = tot+ serv.total%}
+                                                <td  style="font-size: 12px;">{{ serv.libelle }}</td>
+                                                <td  style="font-size: 12px;text-align: center;">{{ serv.total }} </td>
+                                                <td  style="text-align: center;">  
+                                                    <a href="{{ path('bz_blog_detail_objet', {'objet':  serv.id,'exercice': exercice  }) }}" class="btn btn-info btn-xs btn-flat " ><i class="icon  icon-share "></i></a>
+                                                </td>
+                                            </tr>
+                                            
+                                        {% endfor %}
+                                       
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                                <td  style="font-size: 12px;text-align: center;" >TOTAL</td>
+                                                 <td  style="font-size: 12px;text-align: center;">{{ tot }}</td>
+                                                 <td  style="font-size: 12px;"></td>
+                                             </tr>
+                                             </tfoot>
+                                </table>
+                                         
+                            </div>
+                        </div>
+                    </div>
+                                                 
+                    <div class="tab-pane fade" id="profile2">
+                        
+                        <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example3" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example3" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Emplacements/Références de courier
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example3" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nombre Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example3" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Détails
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% set tot = 0 %}
+                                        {% for serv in emplacements %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                 {% set tot = tot+ serv.total%}
+                                                <td  style="font-size: 12px;">{{ serv.libelle }}</td>
+                                                <td  style="font-size: 12px;text-align: center;">{{ serv.total }} </td>
+                                                <td  style="text-align: center;">  
+                                                    <a href="{{ path('bz_blog_detail_emplacement', {'emplacement':  serv.id,'exercice': exercice  }) }}" class="btn btn-info btn-xs btn-flat " ><i class="icon  icon-share "></i></a>
+                                                </td>
+                                            </tr>
+                                            
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                                <td  style="font-size: 12px;text-align: center;" >TOTAL</td>
+                                                 <td  style="font-size: 12px;text-align: center;">{{ tot }}</td>
+                                                 <td  style="font-size: 12px;"></td>
+                                             </tr>
+                                             </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile3">
+                        
+                        <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example4" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example4" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Ordres d'importance
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example4" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nombre Enregistré
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example4" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Détails
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% set tot = 0 %}
+                                        {% for serv in importances %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                 {% set tot = tot+ serv.total%}
+                                                <td  style="font-size: 12px;">{{ serv.libelle }}</td>
+                                                <td  style="font-size: 12px;text-align: center;">{{ serv.total }} </td>
+                                                <td  style="text-align: center;">  
+                                                    <a href="{{ path('bz_blog_detail_importance', {'importance':  serv.id,'exercice': exercice  }) }}" class="btn btn-info btn-xs btn-flat " ><i class="icon  icon-share "></i></a>
+                                                </td>
+                                            </tr>
+                                            
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                                <td  style="font-size: 12px;text-align: center;" >TOTAL</td>
+                                                 <td  style="font-size: 12px;text-align: center;">{{ tot }}</td>
+                                                 <td  style="font-size: 12px;"></td>
+                                             </tr>
+                                             </tfoot>
+                                </table>
+                                        
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="profile1">
+                      
+                     <div class="table-responsive">
+                            <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                                <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example1" aria-describedby="dataTables-example1_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Exercices
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTables-example1" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                                Nombre Enregistré
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set nbre = 0 %}
+                                        {% set tot = 0 %}
+                                        {% for serv in exercices %}
+                                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                                {% set nbre = nbre+1 %}
+                                                {% set tot = tot+ serv.total%}
+                                                <td  style="font-size: 12px;">{{ serv.annee }}</td>
+                                                <td  style="font-size: 12px;text-align: center;">{{ serv.total }} </td>
+                                            </tr>
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                                 <td  style="font-size: 12px;text-align: center;">TOTAL</td>
+                                                 <td  style="font-size: 12px;text-align: center;">{{ tot }}</td>
+                                             </tr>
+                                             </tfoot>
+                                </table>
+                            </div>
+                        </div>                    
+                    </div>           
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content_body %}
+{% block javascript %} 
+    <script>
+            $('#dataTables-example1').dataTable();
+            $('#dataTables-example2').dataTable();
+            $('#dataTables-example3').dataTable();
+            $('#dataTables-example4').dataTable();
+        $('#getExercices').change(function() {
+            if($('#getExercices').val()==="")
+            {
+                
+            }
+            else
+            {
+           // alert('route de la liste des estdirecteurtechniques de la structure '+$(this).val());
+           var url='{{ path("bz_blog_stat_read",{'exercice':  'exercice' }) }}';
+           url=url.replace("exercice", $(this).val()==="" ? 0 : $(this).val());
+           location.href=""+url+"";
+            }
+        });
+     </script>
+{% endblock javascript %}

@@ -1,0 +1,51 @@
+{% extends "BZUserBundle::layout.html.twig"%}
+
+{% block content_body %}
+    
+<div style="display: block;" >
+<form  class="ui-draggable" style="position: relative; left: 194px; top: 99px;"  action="{{ path('avant_enregistrementpc') }}" method="post"  >
+<div class="col-lg-5">
+    <div class="panel panel-success">
+        <div class="panel-heading" style="font-size: 12px;">
+             {% block parentTitre %}  PRECISER L'EXERCICE ET L'AGENCE {% endblock parentTitre %}
+        </div>
+        <div class="panel-body">
+          {% block parentContenu %}
+              <select style="width: 80%; " id="getExercice" name="getExercice" required="true" class="form-control chzn-select">
+                <option value="">--Choisissez l'exercice--</option>
+                {% for exo  in  exercices %}
+                    <option value="{{ exo.id }}" {% if idexercice is defined%} {% if exo.id==idexercice %} selected="true" {% endif %}{% endif %}>{{exo.annee}}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            <br/>
+              <select style="width: 80%; " id="getAgence" name="getAgence" required="true" class="form-control chzn-select">
+                <option value="">--Choisissez l'agence--</option>
+                {% for agce  in  agences %}
+                    <option value="{{ agce.id }}" {% if idagence is defined%} {% if agce.id==idagence %} selected="true" {% endif %}{% endif %}>{{agce.denomination}}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            <br/>
+           {% endblock parentContenu %}
+        </div>
+        <div class="panel-footer ">
+         {% block parentBoutons %} 
+            <button type="submit" class="btn btn-success btn-xs btn-line" >Enregistrer</button>
+                  <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Enregistrement ...</span>
+        {% endblock parentBoutons %}
+        </div>
+    </div>
+</div>
+
+</form>
+</div>
+{% endblock content_body %}
+{% block javascript %} 
+    <script>
+          $(".chzn-select").chosen();
+     $('form').draggable();
+    
+</script>  
+       
+{% endblock javascript %}

@@ -1,0 +1,28 @@
+<div style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<form  class="ui-draggable" style="position: relative; left: 424px; top: 229px;" action="{{ path('delete_archive', {'id': id }) }}" method="post"  >
+<div class="col-lg-4">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            SUPPRESSION  D'ARCHIVE
+        </div>
+        <div class="panel-body" style="font-size: 12px;">
+           <p>Date d'archivage :  <strong> {{ archive.dateArchive|date('d/m/Y') }} </strong> </p>
+           <p>Catégorie :  <strong> {{ archive.categoriearchive.libelle }} </strong> </p>
+           <p>Références :  <strong> {{ archive.ref }} </strong> </p>
+           <p>Archivé physiquement dans :  <strong> {{ archive.objetclassement.emplacementComplet }} </strong> </p>
+           <p>Résumé du Contenu :  <br> <strong> {{ archive.contenu}} </strong> </p>
+           <p style="color: red;">Confirmez - vous la suppression  de  cet  archive  ?</p>
+           
+        </div>
+        <div class="panel-footer">
+            <a type="button" class="btn btn-sm btn-default " href="{{ path('read_archive',{'exercice': exercice}) }}" id="retour" ><i class="icon-arrow-left"> </i> Annuler</a>
+                  <button type="submit" class="btn btn-sm  btn-danger" >Supprimer</button>
+                  <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Suppression ...</span>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+     $('form').draggable();
+   
+</script></div>

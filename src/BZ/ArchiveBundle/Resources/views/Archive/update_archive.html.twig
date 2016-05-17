@@ -1,0 +1,30 @@
+<div style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<form  class="ui-draggable" style="position: relative; left: 424px; top: 90px;" action="{{ path('update_archive', {'id': id }) }}" method="post" {{ form_enctype(form) }} >
+<div class="col-lg-4">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+             DONNEES D'IDENTIFICATION DE L'ARCHIVE     (1/2)
+        </div>
+        <div class="panel-body">
+          
+           {{ form_widget(form) }}
+        </div>
+        <div class="panel-footer">
+            <a type="button" class="btn btn-sm btn-default " href="#" id="retour" onclick="location.reload();"><i class="icon-arrow-left"> </i> Retour</a>
+                  <button type="submit" class="btn btn-sm  btn-warning" >Suivant <i class="icon-arrow-right"> </i></button>
+                  <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Modification ...</span>
+        </div>
+    </div>
+</div>
+{{ form_rest(form) }}
+</form>
+<script>
+      $(".chzn-select").chosen();
+       $(".chzn-select-deselect").chosen({
+        allow_single_deselect: true
+       });
+       
+     $('form').draggable();
+     $('form input.date').datepicker();
+      
+</script></div>

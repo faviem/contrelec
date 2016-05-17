@@ -1,0 +1,4 @@
+parameters:
+#    faviempub.example.class: faviem\pubBundle\Example
+
+services:

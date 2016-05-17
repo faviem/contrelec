@@ -1,0 +1,24 @@
+read_service:
+    pattern:    /read_service
+    defaults: { _controller: BZUserBundle:Service:read_service }
+    
+create_service:
+    pattern:    /create_service
+    defaults: { _controller: BZUserBundle:Service:create_service }
+
+
+update_service:
+    pattern:    /update_service/{id}
+    defaults: { _controller: BZUserBundle:Service:update_service }
+    requirements:
+        id: \d+
+        
+delete_service:
+    pattern:    /delete_service/{id}
+    defaults: { _controller: BZUserBundle:Service:delete_service }
+    requirements:
+        id: \d+
+                
+print_service:
+    pattern:    /print_service
+    defaults: { _controller: BZUserBundle:Service:print_service }

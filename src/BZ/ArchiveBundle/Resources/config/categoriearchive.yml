@@ -1,0 +1,24 @@
+
+read_categoriearchive:
+    pattern:    /read_categoriearchive
+    defaults: { _controller: BZArchiveBundle:CategorieArchive:read_categoriearchive}  
+    
+create_categoriearchive:
+    pattern:    /create_categoriearchive
+    defaults: { _controller: BZArchiveBundle:CategorieArchive:create_categoriearchive}
+    
+update_categoriearchive:
+    pattern:    /update_categoriearchive/{id}
+    defaults: { _controller: BZArchiveBundle:CategorieArchive:update_categoriearchive}
+    requirements:
+        id: \d+
+    
+delete_categoriearchive:
+    pattern:    /delete_categoriearchive/{id}
+    defaults: { _controller: BZArchiveBundle:CategorieArchive:delete_categoriearchive}
+    requirements:
+        id: \d+
+        
+print_categoriearchive:
+    pattern:    /print_categoriearchive
+    defaults: { _controller: BZArchiveBundle:CategorieArchive:print_categoriearchive}

@@ -1,0 +1,23 @@
+read_objetclassement:
+    pattern:    /read_objetclassement
+    defaults: { _controller: BZBlogBundle:ObjetClassement:read_objetclassement}  
+    
+create_objetclassement:
+    pattern:    /create_objetclassement
+    defaults: { _controller: BZBlogBundle:ObjetClassement:create_objetclassement}
+    
+update_objetclassement:
+    pattern:    /update_objetclassement/{id}
+    defaults: { _controller: BZBlogBundle:ObjetClassement:update_objetclassement}
+    requirements:
+        id: \d+
+    
+delete_objetclassement:
+    pattern:    /delete_objetclassement/{id}
+    defaults: { _controller: BZBlogBundle:ObjetClassement:delete_objetclassement}
+    requirements:
+        id: \d+
+        
+print_objetclassement:
+    pattern:    /print_objetclassement
+    defaults: { _controller: BZBlogBundle:ObjetClassement:print_objetclassement}

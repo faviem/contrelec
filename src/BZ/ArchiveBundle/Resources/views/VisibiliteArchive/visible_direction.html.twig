@@ -1,0 +1,27 @@
+<div style="display: block;" class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+<form  class="ui-draggable" style="position: relative; left: 424px; top: 229px;" action="{{ path('visible_direction',{'id': id}) }}" method="post" >
+<div class="col-lg-4">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            VISIBLE AUX  AGENTS DU SERVICE/DIRECTION
+        </div>
+        <div class="panel-body">
+            <select name="service" data-placeholder="Choisissez le service ou la direction" class="form-control chzn-select" tabindex="-1" style="display: block;">
+            {% for serv in services %}
+                <option value="{{ serv.id }}">{{ serv.denomination }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="panel-footer">
+            <a type="button" class="btn btn-sm btn-default " href="#" id="retour" onclick="location.reload();"><i class="icon-arrow-left"> </i> Retour</a>
+                  <button type="submit" class="btn btn-sm  btn-primary" > <i class="icon-group"> </i> Valider</button>
+                  <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Enregistrement ...</span>
+        </div>
+    </div>
+</div>
+</form>
+<script>
+    $(".chzn-select").chosen();
+     $('form').draggable();
+   
+</script></div>

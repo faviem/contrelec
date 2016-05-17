@@ -1,0 +1,43 @@
+security:
+    encoders:
+   #     Symfony\Component\Security\Core\User\User: plaintext
+        BZ\UserBundle\Entity\User: sha512
+        
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_DIR]
+        ROLE_DIR: [ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+           main:
+               id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        # On crée un pare-feu uniquement pour le formulaire
+        main_login:
+# Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            pattern:    ^/login$
+            anonymous: true 
+        
+# On autorise alors les anonymes sur ce pare-feu
+        main:
+            pattern:        ^/
+            anonymous:      true
+            provider:       main
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+            logout:
+                path:       fos_user_security_logout
+            remember_me:
+                key:        %secret% 
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/bz_blog, roles: ROLE_USER   }
+        - { path: ^/bz_user, roles: ROLE_USER   }
+        - { path: ^/bz_archive, roles: ROLE_USER  }
+        

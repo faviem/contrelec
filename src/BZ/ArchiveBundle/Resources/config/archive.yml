@@ -1,0 +1,34 @@
+
+read_archive:
+    pattern:    /read_archive/{exercice}
+    defaults: { _controller: BZArchiveBundle:Archive:read_archive}  
+    
+nouvel_archive:
+    pattern:    /nouvel_archive
+    defaults: { _controller: BZArchiveBundle:Archive:nouvel_archive}
+    
+etape_suivante:
+    pattern:    /etape_suivante/{id}
+    defaults: { _controller: BZArchiveBundle:Archive:etape_suivante}
+    
+etape_suivante_modif:
+    pattern:    /etape_suivante_modif/{id}
+    defaults: { _controller: BZArchiveBundle:Archive:etape_suivante_modif}
+    
+detail_archive:
+    pattern:    /detail_archive/{id}
+    defaults: { _controller: BZArchiveBundle:Archive:detail_archive}
+    requirements:
+        id: \d+
+        
+update_archive:
+    pattern:    /update_archive/{id}
+    defaults: { _controller: BZArchiveBundle:Archive:update_archive}
+    requirements:
+        id: \d+
+    
+delete_archive:
+    pattern:    /delete_archive/{id}
+    defaults: { _controller: BZArchiveBundle:Archive:delete_archive}
+    requirements:
+        id: \d+

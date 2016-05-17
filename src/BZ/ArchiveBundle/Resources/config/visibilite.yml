@@ -1,0 +1,43 @@
+visible_direction:
+    pattern:    /visible_direction/{id}
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:visible_direction}
+    requirements:
+        id: \d+
+       
+visible_personnel:
+    pattern:    /visible_personnel/{id}
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:visible_personnel}
+    requirements:
+        id: \d+
+        
+visible_agents:
+    pattern:    /visible_agents/{id}
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:visible_agents}
+    requirements:
+        id: \d+
+        
+visible_annuletout:
+    pattern:    /visible_annuletout/{id}
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:visible_annuletout}
+    requirements:
+        id: \d+
+        
+visible_annule:
+    pattern:    /visible_annule/{id}/{idvisible}
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:visible_annule}
+    requirements:
+        id: \d+
+        
+detail_archiverecu:
+    pattern:    /detail_archiverecu/{id}/{idvisible}
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:detail_archiverecu}
+    requirements:
+        id: \d+
+           
+read_visibilite:
+    pattern:    /read_visibilite
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:read_visibilite}  
+    
+read_visibilitenonlu:
+    pattern:    /read_visibilitenonlu
+    defaults: { _controller: BZArchiveBundle:VisibiliteArchive:read_visibilitenonlu}  

@@ -1,0 +1,3 @@
+read_pointexoagence:
+    pattern:    /read_pointexoagence/{idexercice}/{idagence}
+    defaults: { _controller: BZBlogBundle:PointControle:read_pointexoagence}  

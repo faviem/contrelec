@@ -1,0 +1,20 @@
+
+read_qualification:
+    pattern:    /read_qualification
+    defaults: { _controller: BZUserBundle:Qualification:read_qualification }  
+    
+create_qualification:
+    pattern:    /create_qualification
+    defaults: { _controller: BZUserBundle:Qualification:create_qualification }
+    
+update_qualification:
+    pattern:    /update_qualification/{id}
+    defaults: { _controller: BZUserBundle:Qualification:update_qualification }
+    requirements:
+        id: \d+
+    
+delete_qualification:
+    pattern:    /delete_qualification/{id}
+    defaults: { _controller: BZUserBundle:Qualification:delete_qualification }
+    requirements:
+        id: \d+

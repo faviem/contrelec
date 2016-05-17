@@ -1,0 +1,9 @@
+ajout_document_new:
+    pattern:    /ajout_document_new/{id}
+    defaults: { _controller: BZArchiveBundle:DocumentArchive:ajout_document_new}
+       
+delete_document_new:
+    pattern:    /delete_document_new/{id}/{idarchive}
+    defaults: { _controller: BZArchiveBundle:DocumentArchive:delete_document_new}
+    requirements:
+        id: \d+

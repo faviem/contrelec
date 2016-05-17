@@ -1,0 +1,19 @@
+bz_archive_archive:
+    resource: "@BZArchiveBundle/Resources/config/archive.yml"
+    prefix:   /
+    
+bz_archive_categoriearchive:
+    resource: "@BZArchiveBundle/Resources/config/categoriearchive.yml"
+    prefix:   /
+    
+bz_archive_statistique:
+    resource: "@BZArchiveBundle/Resources/config/statistique.yml"
+    prefix:   /
+    
+bz_archive_document:
+    resource: "@BZArchiveBundle/Resources/config/documentarchive.yml"
+    prefix:   /
+    
+bz_archive_visibilite:
+    resource: "@BZArchiveBundle/Resources/config/visibilite.yml"
+    prefix:   /

@@ -1,0 +1,119 @@
+{% extends "BZUserBundle::layout.html.twig"%}
+
+{% block content_body %}
+<div class="col-lg-12" style="margin-top: 1%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span style="text-shadow: 0px 0.5px 0.5px blue;font-size: 13px;"> REPERTOIRE DES MEMBRES </span>
+            <a href="{{ path('print_repuser') }}" style="float: right;margin-right: 5px;color: black;" target="_blank" class="btn btn-default btn-xs btn-flat " > <i class="icon   icon-print"></i></a>                
+        
+          </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+                        <thead>
+                            <tr role="row">
+                                 <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                    Nom et Prénom
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                    e@mail
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                    Photo
+                                </th>
+                               
+                                <th class="sorting" tabindex="0" aria-controls="dataTables-example" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" style="font-size: 13px;text-align: center;">
+                                    Contact(s)
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                           {% set nbre = 0 %}
+                            {% for membr in  membres %}
+                            <tr class="gradeA {% if nbre%2==0 %} odd {% else %} even{% endif%}">
+                                {% set nbre = nbre+1 %}
+                                <td class="" style="font-size: 12px;">
+                                    <div class="tooltip-demo" style="font-size: 12px;">  
+                                           <a  style="text-align: center;" href="#"  data-container="body" data-toggle="popover" data-placement="right" 
+                                                data-content="
+                                                Nom et Prénom(s) : {{ membr.nomPrenom }} 
+                                                -- Direction-Service : {% if membr.service %}{{ membr.service.denomination }} {% else %} Néant {% endif %}
+                                                -- Profil : {% if membr.service %}{{ membr.profil.libelle }} {% else %} Néant {% endif %}
+                                                -- Contact(s) : {{ membr.phone }}
+                                                -- e@mail : {{ membr.email }}
+                                               ">
+                                                    {{ membr.nomPrenom }} 
+                                            </a>
+                                        </div>
+                              </td>
+                                <td class="" style="font-size: 12px;">{{ membr.email }} </td>
+                              <td class="" style="font-size: 12px;text-align: center;"><img src="{% if membr is not null %}{% if membr.image is not null %} {{ asset(membr.image.webPath) }} {% else %} {{ asset('uploads/img/user.jpg') }} {% endif %}{% else %} {{ asset('uploads/img/user.jpg') }} {% endif %}" style="height: 22px;width: 22px;" class="img-circle" alt="Photo"/> </td>
+                                
+                                <td class="" style="font-size: 12px;">  {{ membr.mobile }} </td>
+                            </tr>
+                           {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id='frm_createVille'>
+    
+</div>
+{% endblock content_body %}
+{% block javascript %} 
+    <script>
+       // Notifications();      
+        $('.createVille').click(function(event){
+            var buton= $(this);
+            $('#frm_createVille').html('');
+            $.ajax({
+                   type: 'GET',
+                   url: buton.attr('href'),
+                   cache: false,
+                   success: function(data) {
+                       $('#frm_createVille').html(data);
+                      // $('#frm_createVille').dialog();
+                   },
+                   error: function() {alert('coupé');} });
+               //we dont what the browser to submit the form
+               event.preventDefault();
+        });
+        $('.modifVille').click(function(event){
+            var butonmod= $(this);
+            $('#frm_createVille').html('');
+            $.ajax({
+                   type: 'GET',
+                   url: butonmod.attr('href'),
+                   cache: false,
+                   success: function(data) {
+                       $('#frm_createVille').html(data);
+                      // $('#frm_createVille').dialog();
+                   },
+                   error: function() {alert('coupé');} });
+               //we dont what the browser to submit the form
+               event.preventDefault();
+        });
+        $('.suppVille').click(function(event){
+            var butonsupp= $(this);
+            $('#frm_createVille').html('');
+            $.ajax({
+                   type: 'GET',
+                   url: butonsupp.attr('href'),
+                   cache: false,
+                   success: function(data) {
+                       $('#frm_createVille').html(data);
+                      // $('#frm_createVille').dialog();
+                   },
+                   error: function() {alert('coupé');} });
+               //we dont what the browser to submit the form
+               event.preventDefault();
+        });
+    </script>
+{% endblock javascript %}

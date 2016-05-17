@@ -1,0 +1,23 @@
+read_objetconservation:
+    pattern:    /read_objetconservation
+    defaults: { _controller: BZBlogBundle:ObjetConservation:read_objetconservation}  
+    
+create_objetconservation:
+    pattern:    /create_objetconservation
+    defaults: { _controller: BZBlogBundle:ObjetConservation:create_objetconservation}
+    
+update_objetconservation:
+    pattern:    /update_objetconservation/{id}
+    defaults: { _controller: BZBlogBundle:ObjetConservation:update_objetconservation}
+    requirements:
+        id: \d+
+    
+delete_objetconservation:
+    pattern:    /delete_objetconservation/{id}
+    defaults: { _controller: BZBlogBundle:ObjetConservation:delete_objetconservation}
+    requirements:
+        id: \d+
+               
+print_objetconservation:
+    pattern:    /print_objetconservation
+    defaults: { _controller: BZBlogBundle:ObjetConservation:print_objetconservation}

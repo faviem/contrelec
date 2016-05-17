@@ -1,0 +1,121 @@
+{% extends "BZUserBundle::layout.html.twig"%}
+
+{% block content_body %}
+<div >
+<form id="archiveajout" style="position: relative; top: 60px;left:110px;" action="{{ path('etape_suivante',{ 'id': id }) }}" method="post" >
+<div class="col-lg-8">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+              <i class="icon-download-alt"> </i>  JOINTURE DE DOCUMENTS - VISIBILITE - ARCHIVAGE    (2/2)
+        </div>
+        <div class="panel-body">
+           <p style="font-size: 12px;">Date d'archivage :  <strong> {{ archive.dateArchive|date('d/m/Y') }} </strong> </p>
+           <p style="font-size: 12px;">Catégorie :  <strong> {{ archive.categoriearchive.libelle }} </strong> </p>
+           <p style="font-size: 12px;">Références :  <strong> {{ archive.ref }} </strong> </p>
+           <p style="font-size: 12px;">Archivé physiquement dans :  <strong> {{ archive.objetclassement.ref }} </strong> </p>
+           <p style="font-size: 12px;">Service Responsable :  <strong> {{ archive.service.denomination }} </strong> </p> 
+           <div class="box">
+                            <header>
+                                <h5>DOCUMENTS(S) ARCHIVE(S)</h5>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <a href="#"  class="btn btn-primary btn-sm" onclick="$.ajax({type: 'GET',url: '{{ path('ajout_document_new',{'id': id}) }}',cache: false,success: function(data) {$('#frm_createVille').html(data);},error: function() {alert('coupé');} });">
+                                            <i class="icon-plus"></i>
+                                        </a>
+                                        <a href="#sortableTable" data-toggle="collapse" class="btn btn-default btn-sm accordion-toggle minimize-box">
+                                            <i class="icon-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </header>
+                            <div style="height: auto;" id="sortableTable" class="body in">
+                                <table class="table table-bordered sortableTable responsive-table">
+                                    <tbody style="font-size: 12px;">
+                                        {% set nbredoc=0 %}
+                                            {% for doc in archive.documentarchives %}
+                                                {%  set nbredoc=nbredoc+1 %}
+                                            <tr>
+                                                <td><a href="{{ asset( doc.image.dowloadPath) }}" target="_blank"> {{ doc.image.nameFile }} </a></td>
+                                                <td style="text-align: center;">    <a href="{{ path('delete_document_new',{'idarchive': doc.id,'id': id}) }}" class="btn btn-danger btn-xs btn-flat "><i class="icon   icon-remove-circle icon-white"></i></a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                           {% if  nbredoc==0 %}
+                                             <tr>
+                                                 <td style="color: red;"> Aucun document n'est encore archivé !!! </td>
+                                            </tr>
+                                       {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+           <div class="box">
+                            <header>
+                                <h5>VISIBILITE DE L'ARCHIVE</h5>
+                                <div class="toolbar">
+                                    <div class="btn-group">
+                                        <a href="#"  class="btn btn-primary btn-sm" title="visible par le service ou la direction" onclick="$.ajax({type: 'GET',url: '{{ path('visible_direction',{'id': id}) }}',cache: false,success: function(data) {$('#frm_createVille').html(data);},error: function() {alert('coupé');} });">
+                                            <i class="icon-group"></i> Service
+                                        </a>
+                                        <a href="#"  class="btn btn-primary btn-sm" title="visible par tout le personnel"  onclick="$.ajax({type: 'GET',url: '{{ path('visible_personnel',{'id': id}) }}',cache: false,success: function(data) {$('#frm_createVille').html(data);},error: function() {alert('coupé');} });">
+                                            <i class="icon-group"></i> Personnel
+                                        </a>
+                                        <a href="#"  class="btn btn-primary btn-sm" title="visible seulement par les agents"  onclick="$.ajax({type: 'GET',url: '{{ path('visible_agents',{'id': id}) }}',cache: false,success: function(data) {$('#frm_createVille').html(data);},error: function() {alert('coupé');} });">
+                                            <i class="icon-group"></i>
+                                        </a>
+                                        <a href="{{ path('visible_annuletout',{'id': id}) }}"  class="btn btn-danger btn-sm" title="supprimer toutes les visibilités" >
+                                            <i class="icon-group"></i>
+                                        </a>
+                                        <a href="#sortableTable1" data-toggle="collapse" class="btn btn-default btn-sm accordion-toggle minimize-box">
+                                            <i class="icon-chevron-up"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </header>
+                            <div style="height: auto;" id="sortableTable1" class="body in">
+                                <table class="table table-bordered sortableTable responsive-table">
+                                    <tbody style="font-size: 12px;">
+                                        {% set nbrevis=0 %}
+                                            {% for agent in archive.visibilitearchives %}
+                                                {%  set nbrevis=nbrevis+1 %}
+                                            <tr>
+                                                <td> {{ agent.user.nomPrenom }}</td>
+                                                <td style="text-align: center;">    <a href="{{ path('visible_annule',{'idvisible': agent.id,'id': id}) }}" class="btn btn-danger btn-xs btn-flat "><i class="icon   icon-remove-circle icon-white"></i></a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                           {% if  nbrevis==0 %}
+                                             <tr>
+                                                 <td style="color: red;"> Cet archive n'est rendu visible à aucun autre Agent !!! </td>
+                                            </tr>
+                                       {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+        </div>
+        <div class="panel-footer">
+             <a type="button" class="btn btn-sm btn-default" href="{{ path('delete_archive',{'id': id}) }}" id="retour" > <i class="icon-remove"> </i> Annuler </a>      
+            <button id="sendfiles"    class="btn btn-sm  btn-success" ><i class="icon-save"> </i> Enregistrer</button>
+                  <span class='tachat_img hide'><img src="{{ asset('/images/712.GIF') }}" alt="Second slide" class='img-circle' style="height: 20px;width: 20px;"> Enregistrement d'un document en cours ...</span>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+<div id='frm_createVille'>
+    
+</div>
+{% endblock content_body %}
+{% block javascript %} 
+<script>
+$(".chzn-select").chosen();
+ $('.createVille').click(function(event){
+            var buton= $(this);
+            $('#frm_createVille').html('');
+            //$.ajax({type: 'GET',url: buton.attr('href'),cache: false,success: function(data) {$('#frm_createVille').html(data);},error: function() {alert('coupé');} });}
+               //we dont what the browser to submit the form
+               event.preventDefault();
+        });
+</script>
+{% endblock javascript %}

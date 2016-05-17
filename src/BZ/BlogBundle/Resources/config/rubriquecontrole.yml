@@ -1,0 +1,24 @@
+
+read_rubriquecontrole:
+    pattern:    /read_rubriquecontrole
+    defaults: { _controller: BZBlogBundle:RubriqueControle:read_rubriquecontrole}  
+    
+create_rubriquecontrole:
+    pattern:    /create_rubriquecontrole
+    defaults: { _controller: BZBlogBundle:RubriqueControle:create_rubriquecontrole}
+    
+update_rubriquecontrole:
+    pattern:    /update_rubriquecontrole/{id}
+    defaults: { _controller: BZBlogBundle:RubriqueControle:update_rubriquecontrole}
+    requirements:
+        id: \d+
+    
+delete_rubriquecontrole:
+    pattern:    /delete_rubriquecontrole/{id}
+    defaults: { _controller: BZBlogBundle:RubriqueControle:delete_rubriquecontrole}
+    requirements:
+        id: \d+
+        
+print_rubriquecontrole:
+    pattern:    /print_rubriquecontrole
+    defaults: { _controller: BZBlogBundle:RubriqueControle:print_rubriquecontrole}

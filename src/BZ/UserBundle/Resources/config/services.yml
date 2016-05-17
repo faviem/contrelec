@@ -1,0 +1,38 @@
+parameters:
+    security.user_checker.class: BZ\UserBundle\Security\Core\User\UserChecker
+    bz_user.register.form.type.class: BZ\UserBundle\Form\Type\RegistrationFormType
+    bz_user.resetting.form.type.class: BZ\UserBundle\Form\Type\ResettingFormType
+    bz_user.profile.form.type.class: BZ\UserBundle\Form\Type\ProfileFormType
+
+services:
+#    bz_user.registration_complet:
+#        class: BZ\UserBundle\EventListener\RegistrationConfirmListener
+#        arguments: [@router, @session, @translator, "@service_container"]
+#        tags:
+#            - { name: kernel.event_subscriber }
+
+    security.user_checker:
+        class: %security.user_checker.class%
+        arguments: ['@translator']
+        public: false
+
+# Type de formulaire - Formulaire d'inscription
+    bz_user.register.form.type:
+        class: %bz_user.register.form.type.class%
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: bz_user_registration }
+
+    bz_user.resetting.form.type:
+        class: %bz_user.resetting.form.type.class%
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: bz_user_resetting }
+
+# Type de formulaire - Formulaire de modification du profile
+    bz_user.profile.form.type:
+        class: %bz_user.profile.form.type.class%
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: bz_user_profile }
+
